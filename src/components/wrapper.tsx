@@ -28,6 +28,7 @@ interface Props {
     srtTranscript: string;
     mediaUrl: string;
     handleSaveEditor: (srtTranscript: any) => void;
+    handleChange?: () => void;
 }
 
 
@@ -104,12 +105,19 @@ export default function TranscriptEditor(props: Props): JSX.Element {
         props.handleSaveEditor(dpeToSrt(dpeTranscript));
     }
 
+    function handleChange() {
+        if (props.handleChange) {
+            props.handleChange();
+        }
+    }
+
     return <SlateTranscriptEditor
     isEditable={true}
     mediaUrl={props.mediaUrl}
     transcriptData={dpeTranscript}
     autoSaveContentType="digitalpaperedit"
     handleSaveEditor={handleSaveEditor}
+    handleAutoSaveChanges={handleChange}
     showSpeakers={false}
     showTimecodes={true}
     showTitle={false} />;
