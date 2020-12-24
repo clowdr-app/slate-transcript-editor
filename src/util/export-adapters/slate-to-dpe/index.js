@@ -4,7 +4,8 @@ import { Node } from 'slate';
 // helper module to generate html view, that contains and fs, and it breaks storybook webpack.
 // TODO: refactor in ` align-diarized-text` so that it can work outside node only, but also in browser, without workaround
 // const alignDiraizedText = require('../../../../node_modules/align-diarized-text/src/add-timecodes-to-quotes');
-const alignDiraizedText = require('align-diarized-text');
+// const alignDiraizedText = require('align-diarized-text');
+import alignDiraizedText from 'align-diarized-text';
 
 // TODO: this function needs to be brough into alignDiraizedText
 // and applied to paragraphs - to avoid boundaries overlapp

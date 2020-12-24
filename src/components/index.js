@@ -19,7 +19,7 @@ import { createEditor, Editor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { withHistory } from 'slate-history';
 import {
-  faSave,
+faSave,
   faShare,
   faUndo,
   faSync,
@@ -36,7 +36,7 @@ import slateToText from '../util/export-adapters/txt';
 import download from '../util/downlaod/index.js';
 import convertDpeToSlate from '../util/dpe-to-slate';
 import converSlateToDpe from '../util/export-adapters/slate-to-dpe/index.js';
-import slateToDocx from '../util/export-adapters/docx';
+// import slateToDocx from '../util/export-adapters/docx';
 import restoreTimecodes from '../util/restore-timcodes';
 import pluck from '../util/pluk';
 import subtitlesGenerator from '../util/export-adapters/subtitles-generator/index.js';
@@ -302,12 +302,12 @@ export default function SlateTranscriptEditor(props) {
         return value;
       case 'json-digitalpaperedit':
         return converSlateToDpe(value, props.transcriptData);
-      case 'word':
-        let docTmpValue = value;
-        if (timecodes) {
-          docTmpValue = handleRestoreTimecodes();
-        }
-        return slateToDocx({ value: docTmpValue, speakers, timecodes, title: props.title });
+      // case 'word':
+      //   let docTmpValue = value;
+      //   if (timecodes) {
+      //     docTmpValue = handleRestoreTimecodes();
+      //   }
+      //   return slateToDocx({ value: docTmpValue, speakers, timecodes, title: props.title });
       default:
         // some default, unlikely to be called
         return {};
@@ -415,7 +415,7 @@ export default function SlateTranscriptEditor(props) {
               }
           `}
       </style>
-      <style scope>
+      <style scoped>
         {`.editor-wrapper-container{
                 padding: 8px 16px;
                 background: #f9f9f9;
@@ -875,11 +875,11 @@ SlateTranscriptEditor.propTypes = {
   handleSaveEditor: PropTypes.func,
   handleAutoSaveChanges: PropTypes.func,
   autoSaveContentType: PropTypes.string,
-  isEditable: PropTypes.boolean,
-  showTimecodes: PropTypes.boolean,
-  showSpeakers: PropTypes.boolean,
+  isEditable: PropTypes.bool,
+  showTimecodes: PropTypes.bool,
+  showSpeakers: PropTypes.bool,
   title: PropTypes.string,
-  showTitle: PropTypes.boolean,
+  showTitle: PropTypes.bool,
   mediaType: PropTypes.string,
   transcriptDataLive: PropTypes.object,
 };
