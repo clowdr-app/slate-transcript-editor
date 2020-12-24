@@ -5,9 +5,6 @@ import { terser } from 'rollup-plugin-terser';
 import esbuild from 'rollup-plugin-esbuild';
 import alias from '@rollup/plugin-alias';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
-
-const extensions = ['.js', '.ts', '.tsx', '.jsx'];
 
 export default [
   {
@@ -15,7 +12,7 @@ export default [
     output: {
       file: 'output/TranscriptEditor.js',
       format: 'es',
-      // plugins: [terser()],
+      plugins: [terser()],
     },
     external: ['react', 'react-dom', 'react-is'],
     plugins: [
@@ -39,31 +36,6 @@ export default [
         // transformMixedEsModules: true,
         include: /node_modules/,
       }),
-      // babel({
-      //   extensions,
-      //   exclude: /node_modules/,
-      //   babelrc: false,
-      //   babelHelpers: 'runtime',
-      //   presets: [
-      //     '@babel/preset-env',
-      //     '@babel/preset-react',
-      //     '@babel/preset-typescript',
-      //   ],
-      //   plugins: [
-      //     'react-require',
-      //     '@babel/plugin-syntax-dynamic-import',
-      //     '@babel/plugin-proposal-class-properties',
-      //     ['@babel/plugin-proposal-object-rest-spread', {
-      //       useBuiltIns: true,
-      //     }],
-      //     ['@babel/plugin-transform-runtime', {
-      //       corejs: 3,
-      //       helpers: true,
-      //       regenerator: true,
-      //       useESModules: false,
-      //     }],
-      //   ],
-      // }),
       // analyze({summaryOnly: true})
     ],
   },

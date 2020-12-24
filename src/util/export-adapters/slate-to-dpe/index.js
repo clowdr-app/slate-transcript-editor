@@ -44,7 +44,33 @@ const converSlateToDpe = (data, sttJson) => {
   const linesWithSpeaker = prepSlateParagraphForAlignement(data);
   console.log('linesWithSpeaker', linesWithSpeaker);
   console.log('sttJson', sttJson);
-  const res = alignDiraizedText(linesWithSpeaker, sttJson);
+  //const res = alignDiraizedText(linesWithSpeaker, sttJson);
+
+  const res = linesWithSpeaker.map((line, idx) => {
+    const startTime = parseFloat(line.start);
+    const endTime = linesWithSpeaker.length > idx + 1 ? parseFloat(linesWithSpeaker[idx + 1].start) : startTime + 1;
+
+    const nodeWords = line.text.split(/\s+/);
+    const words = nodeWords
+        .map((nodeWord, idx) => {
+            const word = {
+                start: ((startTime * (nodeWords.length - idx)) + (endTime * idx)) / nodeWords.length, // weighted average of paragraph start and end times
+                end: ((startTime * (nodeWords.length - (idx + 1))) + (endTime * (idx + 1))) / nodeWords.length,
+                text: nodeWord,
+            };
+            return word;
+        });
+
+    return {
+      end: endTime,
+      start: startTime,
+      id: line.id,
+      speaker: line.speaker,
+      text: line.text,
+      words,
+    }
+  });
+
   console.log('res', res);
   const words = res
     .map(paragraph => {
