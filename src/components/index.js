@@ -403,6 +403,7 @@ export default function SlateTranscriptEditor(props) {
     return tmpMediaType;
   };
   return (
+    <div className="transcript-editor-bootstrap">
     <Container fluid style={{ backgroundColor: '#eee', height: '100vh', paddingTop: '1em' }}>
       <style scoped>
         {`
@@ -696,6 +697,7 @@ export default function SlateTranscriptEditor(props) {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }
 
